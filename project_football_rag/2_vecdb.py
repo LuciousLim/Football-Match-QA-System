@@ -89,6 +89,8 @@ class TextV4Embeddings(Embeddings):
 embedding_fn = TextV4Embeddings(api_key=DASHSCOPE_KEY)
 
 from langchain_community.vectorstores import Chroma
+# from langchain_chroma import Chroma
+
 
 def make_vectordb():
     return Chroma(
@@ -98,7 +100,6 @@ def make_vectordb():
     )
 
 def safe_str(x):
-    """UTF-8 清洗，忽略不可编码字符，避免 Windows 写盘报错。"""
     if x is None:
         return ""
     if not isinstance(x, str):
@@ -189,7 +190,7 @@ def main():
 
     flush_block()
 
-    print(f"Wrote：{total} 条 | time: {time.time()-t0:.1f}s | dir：{Path(CHROMA_DIR).resolve()} | collection：{COLLECTION}")
+    print(f"Wrote：{total} | time: {time.time()-t0:.1f}s | dir：{Path(CHROMA_DIR).resolve()} | collection：{COLLECTION}")
 
 if __name__ == "__main__":
     main()
